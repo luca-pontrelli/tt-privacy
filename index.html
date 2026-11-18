@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DuoTrip — Il tuo viaggio, insieme</title>
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: linear-gradient(120deg, #7A0C2E 0%, #5C0821 55%, #3E0017 100%); color: #fff; padding: 16px;
+    }
+    .card {
+      width: 100%; max-width: 440px; background: #fff; color: #1a1a1a; border-radius: 16px;
+      padding: 28px 24px; box-shadow: 0 20px 60px rgba(0,0,0,.35); text-align: center;
+    }
+    h1 { margin: 0 0 6px; font-size: 22px; color: #7A0C2E; }
+    .sub { margin: 0 0 18px; color: #5f6368; font-size: 14px; }
+    a.btn {
+      display: inline-block; width: 100%; padding: 13px; border-radius: 8px; background: #7A0C2E; color: #fff;
+      font-size: 16px; font-weight: 600; text-decoration: none; margin-top: 6px;
+    }
+    p.msg { font-size: 15px; color: #1a1a1a; text-align: left; }
+    p.msg.err { color: #b3261e; }
+    .foot { margin-top: 18px; font-size: 12px; color: #80868b; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>DuoTrip</h1>
+    <p class="sub" id="sub">Il tuo viaggio, insieme.</p>
+    <div id="content">
+      <p class="msg" id="msg">Caricamento…</p>
+      <a class="btn" id="open" href="duotrip://auth/callback">Apri DuoTrip</a>
+    </div>
+    <p class="foot">Se il link è scaduto, apri l'app DuoTrip e richiedi un nuovo link
+      con «Password dimenticata?».</p>
+  </div>
+
+  <script>
+    var hash = window.location.hash.replace(/^#/, "");
+    var params = new URLSearchParams(hash);
+    var token = params.get("access_token");
+    var type = params.get("type");
+    var error = params.get("error");
+    var msg = document.getElementById("msg");
+    var open = document.getElementById("open");
+
+    if (token) {
+      if (type === "recovery") {
+        window.location.replace("./recovery.html#" + hash);
+      } else {
+        msg.textContent = "Accesso completato: torna nell'app DuoTrip.";
+        open.href = "duotrip://auth/callback#" + hash;
+      }
+    } else if (error) {
+      msg.className = "msg err";
+      msg.textContent = "Link scaduto o non valido. Apri l'app DuoTrip e richiedi un nuovo link con «Password dimenticata?»: riceverai una email con il link aggiornato.";
+      open.href = "duotrip://auth/callback";
+    } else {
+      msg.textContent = "Questa pagina serve i link di accesso e recupero password di DuoTrip. Apri il link dall'email che hai ricevuto, oppure usa l'app.";
+    }
+  </script>
+</body>
+</html>
