@@ -1,113 +1,95 @@
 <!doctype html>
-<html lang="it">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DuoTrip — Nuova password</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <style>
-    :root { color-scheme: light; }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      background: linear-gradient(120deg, #7A0C2E 0%, #5C0821 55%, #3E0017 100%); color: #fff; padding: 16px;
-    }
-    .card {
-      width: 100%; max-width: 420px; background: #fff; color: #1a1a1a; border-radius: 16px;
-      padding: 28px 24px; box-shadow: 0 20px 60px rgba(0,0,0,.35);
-    }
-    h1 { margin: 0 0 4px; font-size: 22px; color: #7A0C2E; }
-    .sub { margin: 0 0 20px; color: #5f6368; font-size: 14px; }
-    label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
-    input[type=password] {
-      width: 100%; padding: 12px; border: 1px solid #c9ccd1; border-radius: 8px; font-size: 16px; margin-bottom: 14px;
-    }
-    button {
-      width: 100%; padding: 13px; border: 0; border-radius: 8px; background: #7A0C2E; color: #fff;
-      font-size: 16px; font-weight: 600; cursor: pointer;
-    }
-    button:disabled { opacity: .6; cursor: wait; }
-    .msg { margin: 14px 0 0; font-size: 14px; }
-    .ok { color: #137333; }
-    .err { color: #b3261e; }
-    .foot { margin-top: 18px; font-size: 12px; color: #80868b; }
-    a { color: #7A0C2E; }
-  </style>
-</head>
-<body>
-  <div class="card">
-    <h1>DuoTrip</h1>
-    <p class="sub" id="sub">Imposta la tua nuova password.</p>
-    <div id="form">
-      <label for="pw">Nuova password</label>
-      <input type="password" id="pw" minlength="8" autocomplete="new-password" placeholder="Almeno 8 caratteri">
-      <button id="btn">Salva nuova password</button>
-    </div>
-    <p class="msg" id="msg" role="status" aria-live="polite"></p>
-    <p class="foot">Poi torna nell'app DuoTrip e accedi con la nuova password.
-      <a href="#" id="deep">Apri DuoTrip</a></p>
-  </div>
+<html lang="it"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src https://*.supabase.co; script-src 'unsafe-inline'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<!-- The Pages deployment stamps these two public client settings from its trusted project configuration. -->
+<meta name="duotrip-auth-origin" content="https://luxiujwcnkddtphykvar.supabase.co">
+<meta name="duotrip-auth-public-key" content="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx1eGl1andjbmtkZHRwaHlrdmFyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ4NTAxNTAsImV4cCI6MjExMDQyNjE1MH0.7ho_DBswKFkwszMBc5cGGbtb2m-Vw_OckkC9ZaAGWF4">
+<title>DuoTrip · Recupera password</title><style>:root{color-scheme:light dark;font:1rem/1.55 system-ui,sans-serif;color:#2b211e;background:#faf7f2}body{max-width:32rem;margin:clamp(2rem,12vh,7rem) auto;padding:0 1.25rem}h1{font-size:clamp(1.75rem,6vw,2.5rem);line-height:1.15}a{color:#742c42}a,button,input{font:inherit}label,input{display:block}input,button{box-sizing:border-box;padding:.75rem;min-height:48px;border-radius:.6rem}input{width:100%;margin:.3rem 0 1rem;border:1px solid #796b68}button{background:#742c42;color:white;border:0;cursor:pointer}button:disabled{opacity:.6}a:focus-visible,input:focus-visible,button:focus-visible{outline:3px solid #2779aa;outline-offset:4px}[hidden]{display:none!important}@media(prefers-color-scheme:dark){:root{color:#f4ece7;background:#221c1b}a{color:#ffb4c3}button{background:#ffb4c3;color:#30191d}}</style></head>
+<body><main><p>DuoTrip</p><h1 id="heading">Recupera la password</h1>
+<p id="message" role="status" aria-live="polite">Apri il link che hai ricevuto per email.</p>
+<form id="form" hidden>
+<label for="password" id="passwordLabel">Nuova password</label><input id="password" type="password" autocomplete="new-password" minlength="8" required>
+<label for="repeat" id="repeatLabel">Ripeti la password</label><input id="repeat" type="password" autocomplete="new-password" minlength="8" required>
+<button id="save" type="submit">Salva password</button></form>
+<p><a id="open" href="duotrip://auth/callback">Apri DuoTrip</a></p></main>
+<script>
+(() => {
+  const fragment = new URLSearchParams(location.hash.slice(1));
+  const query = new URLSearchParams(location.search);
+  history.replaceState(null, "", location.pathname);
+  const english = !(navigator.language || "it").toLowerCase().startsWith("it");
+  const say = (it, en) => english ? en : it;
+  const el = id => document.getElementById(id);
+  const status = text => { el("message").textContent = text; };
+  document.documentElement.lang = english ? "en" : "it";
+  el("heading").textContent = say("Recupera la password", "Reset your password");
+  document.title = "DuoTrip · " + el("heading").textContent;
+  el("passwordLabel").textContent = say("Nuova password", "New password");
+  el("repeatLabel").textContent = say("Ripeti la password", "Confirm password");
+  el("save").textContent = say("Salva password", "Save password");
+  el("open").textContent = say("Apri DuoTrip", "Open DuoTrip");
 
-  <script>
-    var URL_PROJECT = "https://luxiujwcnkddtphykvar.supabase.co";
-    var ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx1eGl1andjbmtkZHRwaHlrdmFyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ4NTAxNTAsImV4cCI6MjExMDQyNjE1MH0.7ho_DBswKFkwszMBc5cGGbtb2m-Vw_OckkC9ZaAGWF4";
-    var supabase = window.supabase.createClient(URL_PROJECT, ANON_KEY);
-    var msg = document.getElementById("msg");
-    var form = document.getElementById("form");
-    var btn = document.getElementById("btn");
-    var pw = document.getElementById("pw");
-    var sub = document.getElementById("sub");
-    var deep = document.getElementById("deep");
-    deep.href = "duotrip://auth/callback";
-
-    var hash = window.location.hash.replace(/^#/, "");
-    var params = new URLSearchParams(hash);
-    var accessToken = params.get("access_token");
-    var type = params.get("type");
-
-    function show(text, cls) { msg.textContent = text; msg.className = "msg " + (cls || ""); }
-
-    async function init() {
-      if (!accessToken) {
-        form.style.display = "none";
-        sub.textContent = "Link non valido o già usato: richiedi un nuovo link di recupero dall'app DuoTrip.";
-        show("Nessun token di recupero valido. Riprova dall'app.", "err");
-        return;
+  const form = el("form");
+  const rejected = fragment.has("error") || query.has("error") || fragment.has("error_code") || query.has("error_code");
+  let token = !rejected && fragment.get("type") === "recovery" ? fragment.get("access_token") : null;
+  const expires = Number(fragment.get("expires_at") || 0);
+  for (const key of [...fragment.keys()]) fragment.delete(key);
+  const clear = () => { token = null; form.reset(); form.hidden = true; };
+  const expired = () => {
+    clear();
+    status(say("Questo link non è valido o è scaduto. Apri DuoTrip e richiedi un nuovo link da Password dimenticata.", "This link is invalid or expired. Open DuoTrip and request a new link from Forgot password."));
+  };
+  if (!token || token.length > 16384 || (expires && expires * 1000 <= Date.now())) { expired(); return; }
+  const meta = name => document.querySelector('meta[name="duotrip-auth-' + name + '"]').content.trim();
+  const origin = meta("origin");
+  const publicKey = meta("public-key");
+  function validPublicKey(key) {
+    if (/^sb_publishable_[A-Za-z0-9_-]+$/.test(key)) return true;
+    try {
+      const parts = key.split(".");
+      const payload = JSON.parse(atob(parts[1].replace(/-/g, "+").replace(/_/g, "/")));
+      return parts.length === 3 && payload.role === "anon";
+    } catch { return false; }
+  }
+  if (!/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(origin) || !validPublicKey(publicKey)) {
+    clear();
+    status(say("Il recupero è temporaneamente indisponibile. Riprova più tardi dall’app.", "Password reset is temporarily unavailable. Try again later from the app."));
+    return;
+  }
+  form.hidden = false;
+  status(say("Scegli una password di almeno 8 caratteri.", "Choose a password with at least 8 characters."));
+  window.addEventListener("pagehide", clear);
+  window.addEventListener("pageshow", event => { if (event.persisted && !token) expired(); });
+  form.addEventListener("submit", async event => {
+    event.preventDefault();
+    if (!token || el("save").disabled) return;
+    const password = el("password").value;
+    if (password.length < 8 || password !== el("repeat").value) {
+      status(say("Inserisci la stessa password di almeno 8 caratteri in entrambi i campi.", "Enter the same password of at least 8 characters in both fields."));
+      return;
+    }
+    el("save").disabled = true;
+    try {
+      const response = await fetch(origin + "/auth/v1/user", {
+        method: "PUT", mode: "cors", credentials: "omit", redirect: "error", referrerPolicy: "no-referrer",
+        headers: {"Content-Type":"application/json", "apikey":publicKey, "Authorization":"Bearer " + token},
+        body: JSON.stringify({password})
+      });
+      if (response.ok) {
+        clear();
+        status(say("Password aggiornata. Apri DuoTrip e accedi con la nuova password.", "Password updated. Open DuoTrip and sign in with the new password."));
+      } else if (response.status === 401 || response.status === 403) {
+        expired();
+      } else if (response.status === 422) {
+        status(say("La password non è stata accettata. Scegline una diversa e riprova.", "This password wasn’t accepted. Choose a different password and try again."));
+      } else {
+        status(say("Non è stato possibile salvare la password. Riprova tra poco.", "Couldn’t save your password. Try again shortly."));
       }
-      var t = type === "recovery" ? "recovery" : "session";
-      var res = await supabase.auth.setSession({ access_token: accessToken, refresh_token: "" });
-      if (res.error) {
-        form.style.display = "none";
-        sub.textContent = "Il link è scaduto o è già stato usato.";
-        show("Link scaduto: richiedi un nuovo link dall'app DuoTrip.", "err");
-        return;
-      }
-      if (t !== "recovery") {
-        form.style.display = "none";
-        sub.textContent = "Accesso completato.";
-        show("Accesso riuscito: torna nell'app DuoTrip.", "ok");
-        window.location.href = "duotrip://auth/callback#" + hash;
-        return;
-      }
-    }
-
-    btn.addEventListener("click", async function () {
-      var value = pw.value;
-      if (value.length < 8) { show("La password deve avere almeno 8 caratteri.", "err"); return; }
-      btn.disabled = true; btn.textContent = "Salvataggio…";
-      var res = await supabase.auth.updateUser({ password: value });
-      if (res.error) {
-        btn.disabled = false; btn.textContent = "Salva nuova password";
-        show("Impossibile salvare: " + (res.error.message || "riprova"), "err");
-        return;
-      }
-      form.style.display = "none";
-      sub.textContent = "Fatto!";
-      show("Password aggiornata. Torna nell'app DuoTrip e accedi.", "ok");
-    });
-
-    init().catch(function (e) { show("Errore imprevisto: riprova.", "err"); });
-  </script>
-</body>
-</html>
+    } catch {
+      status(say("Connessione non disponibile. Controlla la rete e riprova.", "Connection unavailable. Check your network and try again."));
+    } finally { el("save").disabled = false; }
+  });
+})();
+</script></body></html>

@@ -1,76 +1,99 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Privacy Policy — DuoTrip</title>
-<style>
-  body { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; max-width: 42rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.6; color: #201a1b; }
-  h1 { color: #7a0c2e; } h2 { color: #7a0c2e; font-size: 1.15rem; margin-top: 1.6rem; }
-  .meta { color: #555; font-size: .9rem; }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Come DuoTrip tratta account, itinerari e documenti condivisi. How DuoTrip processes account information, travel plans and shared files.">
+  <meta name="referrer" content="no-referrer">
+  <title>Informativa privacy / Privacy notice · DuoTrip</title>
+  <style>
+    :root { color-scheme: light dark; --paper: #fffaf8; --ink: #231c1e; --muted: #5b4a50; --link: #7d1738; --line: #d8c6ca; }
+    @media (prefers-color-scheme: dark) {
+      :root { --paper: #20191c; --ink: #f5ecef; --muted: #d3bec5; --link: #ffafca; --line: #59474d; }
+    }
+    * { box-sizing: border-box; }
+    body { background: var(--paper); color: var(--ink); margin: 0 auto; max-width: 48rem; padding: 1rem clamp(1rem, 4vw, 2.5rem) 3rem; font: 1rem/1.6 "Atkinson Hyperlegible Next", Roboto, system-ui, sans-serif; overflow-wrap: anywhere; }
+    header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: .5rem 1rem; padding: .75rem 0 1rem; border-bottom: 1px solid var(--line); }
+    header strong { font-size: 1.2rem; }
+    nav { display: flex; flex-wrap: wrap; gap: 1.2rem; }
+    a { color: var(--link); text-underline-offset: .18em; }
+    a:focus-visible { outline: 3px solid var(--link); outline-offset: 4px; }
+    article { scroll-margin-top: 1rem; }
+    article + article { border-top: 1px solid var(--line); margin-top: 3rem; padding-top: 1.5rem; }
+    h1, .title { font-size: clamp(2rem, 5vw, 2.85rem); line-height: 1.15; margin: 1.5rem 0 .5rem; }
+    h2, h3 { font-size: 1.28rem; line-height: 1.35; margin: 1.8rem 0 .4rem; }
+    p, ul, ol { margin: .5rem 0; }
+    p.meta { color: var(--muted); }
+    li + li { margin-top: .4rem; }
+  </style>
 </head>
 <body>
-<h1>Privacy Policy — DuoTrip</h1>
-<p class="meta">Ultimo aggiornamento: 17 novembre 2026 · App: DuoTrip (com.lupodigital.triptogether)<br>
-Titolare del trattamento: LuPo Digital di Luca Pontrelli — contatti: luca1091@gmail.com</p>
+<header>
+  <strong>DuoTrip</strong>
+  <nav aria-label="Lingua / Language"><a href="#it" lang="it">Italiano</a><a href="#en" lang="en">English</a></nav>
+</header>
+<main>
+<article lang="it" id="it" aria-labelledby="privacy-it">
+  <h1 id="privacy-it">Informativa privacy</h1>
+  <p class="meta">18 novembre 2026 · App Android <code>com.lupodigital.triptogether</code></p>
+  <p>DuoTrip aiuta i maggiorenni a organizzare un viaggio insieme. Il titolare del trattamento è <strong>LuPo Digital di Luca Pontrelli</strong>. Per la privacy scrivi a <a href="mailto:luca1091@gmail.com">luca1091@gmail.com</a>. Per assistenza sull’app scrivi a <a href="mailto:ops@lupodigital.dev">ops@lupodigital.dev</a>.</p>
 
-<h2>In sintesi</h2>
-<p>DuoTrip è un'app per organizzare viaggi in compagnia. Per farlo serve un <strong>account</strong>: l'app raccoglie la tua <strong>email</strong> e sincronizza i <strong>contenuti del viaggio</strong> (attività, spunte, preferiti, inviti) tra i membri del viaggio, tramite il servizio <strong>Supabase</strong> (hosting nell'Unione Europea). Le <strong>note personali</strong> sugli eventi restano <strong>solo sul tuo telefono</strong> e non vengono mai sincronizzate. L'app <strong>non contiene pubblicità, non usa analytics, non raccoglie la posizione</strong> e non ha SDK di tracciamento o crash-reporting.</p>
+  <h2>Dati dell’account e del viaggio</h2>
+  <ul>
+    <li><strong>Account.</strong> L’indirizzo email e l’identificativo dell’account servono per accedere, confermare la registrazione e recuperare la password. Supabase Auth gestisce le credenziali. Se l’accesso con Google è disponibile e lo scegli, Google fornisce il token di identità. Un eventuale nome visualizzato è visibile ai compagni di viaggio.</li>
+    <li><strong>Viaggio condiviso.</strong> Il server conserva titolo, date, fuso orario, attività, luoghi inseriti manualmente, ordine giornaliero, checklist, appartenenze, ruoli e inviti. Gli altri membri vedono il contenuto condiviso del viaggio. Le voci con visibilità privata sono accessibili al loro autore. I luoghi inseriti riguardano l’itinerario. L’app funziona senza permessi di localizzazione del dispositivo.</li>
+    <li><strong>PDF facoltativi.</strong> Il selettore di Android permette di importare un PDF come copia personale sul telefono. Se scegli di condividerlo, DuoTrip invia al server il nome e il contenuto del file. I membri del viaggio possono aprirlo. Il limite è 4 MiB per file e 24 MiB di allegati condivisi per viaggio. Puoi conservare documenti personali soltanto sul dispositivo.</li>
+  </ul>
+  <p>Nell’app, l’invio di un itinerario ad altre persone passa dall’anteprima e dal menu di condivisione di Android. Scegli tu l’app e il destinatario. L’apertura di un PDF può coinvolgere il lettore documenti del dispositivo.</p>
 
-<h2>1. Dati che raccogliamo</h2>
-<ul>
-<li><strong>Email</strong> — necessaria per creare l'account (autenticazione Supabase Auth; la password è gestita in forma di hash dal provider, mai leggibile dall'app).</li>
-<li><strong>Identificativo account (UUID)</strong> — codice tecnico che identifica il tuo profilo.</li>
-<li><strong>Nome visualizzato</strong> — solo se e quando scegli di impostarlo.</li>
-<li><strong>Contenuti del viaggio</strong> — viaggi, eventi, spunte del Check, preferiti, inviti e ruoli che inserisci nell'app; salvati sul backend e visibili <strong>solo ai membri del viaggio</strong> di cui fai parte.</li>
-<li><strong>Accesso con Google</strong> — se attivato, avviene con il meccanismo di sistema Credential Manager: riceviamo l'identificativo Google necessario al login, non la tua password Google.</li>
-</ul>
+  <h2>Finalità, fornitori e trasferimenti</h2>
+  <p>Trattiamo questi dati per fornire il servizio richiesto, compresi autenticazione, sincronizzazione, inviti e assistenza. La base giuridica per queste funzioni è l’esecuzione del contratto, ai sensi dell’articolo 6, paragrafo 1, lettera b del GDPR. L’app è priva di pubblicità e di SDK di analisi pubblicitaria o di crash reporting.</p>
+  <p><strong>Supabase</strong> fornisce l’autenticazione e ospita il database del progetto nella regione UE di Francoforte. L’app usa connessioni HTTPS per trasmettere credenziali e dati di viaggio. <a href="https://supabase.com/privacy">Privacy di Supabase</a>.</p>
+  <p>Quando l’app contatta il servizio, il gateway registra l’indirizzo IP, il tipo di client e una stima della città e del Paese ricavata dalla connessione. Questi log tecnici servono a diagnosticare i problemi di accesso e a proteggere il servizio. La posizione stimata rimane nei log per il periodo di conservazione del progetto. I compagni di viaggio non la vedono. <a href="https://supabase.com/docs/guides/platform/logs">Log del servizio Supabase</a>.</p>
+  <p><strong>Resend</strong> consegna le email transazionali di conferma e recupero. Riceve l’indirizzo del destinatario, il messaggio e i dati tecnici di consegna. Resend indica che conserva negli Stati Uniti i messaggi e i log e descrive le garanzie applicabili ai trasferimenti, comprese le clausole contrattuali standard. <a href="https://resend.com/security/gdpr/">Protezione dei dati e conservazione presso Resend</a> · <a href="https://resend.com/legal/dpa">Accordo sul trattamento</a>.</p>
 
-<h2>2. Contenuto pre-caricato dal proprietario</h2>
-<p>Il viaggio iniziale è stato <strong>pre-caricato dal proprietario dell'app</strong> e può contenere documenti di viaggio personali (riferimenti di prenotazione, orari, biglietti). Questi contenuti sono visibili ai membri del viaggio ed è responsabilità del proprietario condividerli solo con i compagni designati.</p>
+  <h2>Regole, segnalazioni e blocco di un viaggio</h2>
+  <p>Prima di creare o modificare contenuti ti chiediamo di accettare le regole della comunità. Conserviamo il tuo identificativo, la versione accettata e la data. Per segnalare un viaggio, un membro, un’attività, una voce della checklist o un PDF, scegli un motivo tra spam, molestie, privacy e altro. Nella coda privata il team di moderazione riceve gli identificativi del segnalante, del viaggio e dell’elemento segnalato, il motivo e la data. Il modulo raccoglie solo queste informazioni. I moderatori possono consultare le segnalazioni e registrarne lo stato e l’esito.</p>
+  <p>Se scegli di abbandonare e bloccare un viaggio, DuoTrip memorizza un blocco per quell’account e quel viaggio. Gli inviti successivi non possono riaggiungerti. Gli altri gruppi a cui partecipi restano disponibili.</p>
 
-<h2>3. Cosa NON raccogliamo</h2>
-<ul>
-<li><strong>Posizione</strong>, contatti, foto, messaggi, dati finanziari: nessun permesso richiesto.</li>
-<li><strong>File</strong>: i documenti PDF sono contenuti pre-caricati; l'app non carica file dell'utente.</li>
-<li><strong>Telemetria</strong>: nessun SDK di analytics, pubblicità, crash-reporting o profiling.</li>
-</ul>
+  <h2>Conservazione e cancellazione</h2>
+  <p>I dati operativi restano disponibili per l’account e i viaggi a cui appartieni finché li usi o scegli di eliminarli. Le copie locali consentono l’uso offline. L’uscita dall’account e la sua cancellazione avviano la pulizia dei dati dell’account custoditi dall’app sul dispositivo. Per email e log, Resend pubblica un periodo ordinario di 30 giorni per i piani Free, Pro e Scale. <a href="../account-deletion/">Come cancellare l’account e cosa succede ai contenuti</a>.</p>
+  <p>Se aggiorni una vecchia versione, eventuali note, attività o PDF che DuoTrip non può attribuire a un account vengono conservati in un archivio privato sul telefono. L’archivio è escluso da sincronizzazione, condivisione e backup e rimane sul dispositivo dopo l’uscita o la cancellazione dell’account. Puoi eliminarlo insieme a tutti i dati locali di DuoTrip da <strong>Impostazioni Android → App → DuoTrip → Spazio di archiviazione → Cancella dati app</strong>. I nomi dei menu possono variare secondo il telefono.</p>
 
-<h2>4. Dati che restano sul dispositivo</h2>
-<p>Le <strong>note personali</strong> scritte sugli eventi restano esclusivamente in locale sul telefono: non vengono inviate al server né sincronizzate con gli altri membri.</p>
+  <h2>I tuoi diritti</h2>
+  <p>Puoi chiedere accesso, rettifica, cancellazione, limitazione e portabilità, oppure opporti nei casi previsti dal GDPR. Scrivi al titolare a <a href="mailto:luca1091@gmail.com">luca1091@gmail.com</a>. Puoi presentare un reclamo al <a href="https://www.garanteprivacy.it/i-miei-diritti">Garante per la protezione dei dati personali</a>.</p>
+</article>
 
-<h2>5. Finalità e base giuridica</h2>
-<p>I dati sono trattati per il <strong>funzionamento dell'app</strong> (autenticazione, creazione e sincronizzazione dei viaggi condivisi) sulla base dell'<strong>esecuzione del contratto</strong> (art. 6.1.b GDPR). Nessun uso di marketing, nessuna profilazione.</p>
+<article lang="en" id="en" aria-labelledby="privacy-en">
+  <h2 class="title" id="privacy-en">Privacy notice</h2>
+  <p class="meta">18 November 2026 · Android app <code>com.lupodigital.triptogether</code></p>
+  <p>DuoTrip helps adults plan trips together. <strong>LuPo Digital di Luca Pontrelli</strong> is the data controller. Contact <a href="mailto:luca1091@gmail.com">luca1091@gmail.com</a> for privacy requests or <a href="mailto:ops@lupodigital.dev">ops@lupodigital.dev</a> for app support.</p>
 
-<h2>6. Hosting e trasferimenti</h2>
-<p>I dati sono ospitati da <strong>Supabase</strong> (PostgreSQL + Auth), progetto <strong>tt-triptogether</strong>, regione <strong>eu-central-1 (Unione Europea)</strong>. Tutte le comunicazioni avvengono in <strong>TLS</strong> (crittografia in transito). Non sono previsti trasferimenti di dati applicativi fuori dallo Spazio Economico Europeo.</p>
+  <h3>Account and trip information</h3>
+  <ul>
+    <li><strong>Account.</strong> Your email address and account ID enable sign-in, registration confirmation and password recovery. Supabase Auth handles credentials. If Google sign-in is available and you choose it, Google supplies an identity token. Other members of your trips can see your display name if your account has one.</li>
+    <li><strong>Shared trip.</strong> The server stores the trip title, dates, time zone, activities, manually entered places, daily order, checklists, memberships, roles and invitations. Members can see shared trip content. Entries marked private are accessible to their author. The places you enter are part of your itinerary. The app works without device location permissions.</li>
+    <li><strong>Optional PDFs.</strong> Android’s file picker lets you import a personal copy of a PDF onto your phone. If you choose to share it, DuoTrip uploads its name and contents. Members of that trip can open it. Shared attachments are limited to 4 MiB per file and 24 MiB per trip. You may keep a personal document entirely on your device.</li>
+  </ul>
+  <p>To send an itinerary, preview it and use Android’s sharing menu to choose an app and a recipient. Opening a PDF may use a document viewer on your device.</p>
 
-<h2>7. Terze parti</h2>
-<ul>
-<li><strong>Supabase</strong> — fornitore di servizi (processor) che ospita database e autenticazione.</li>
-<li><strong>Google</strong> — solo come identity provider per l'accesso con Google (se attivato).</li>
-</ul>
-<p>Nessun dato è venduto o condiviso a fini commerciali.</p>
+  <h3>Purposes, providers and transfers</h3>
+  <p>We use this information to provide the service you request, including authentication, synchronisation, invitations and support. The legal basis for these functions is performance of the contract under Article 6(1)(b) GDPR. The app is ad-free and contains no advertising analytics or crash-reporting SDKs.</p>
+  <p><strong>Supabase</strong> provides authentication and hosts the project database in the Frankfurt region of the EU. The app uses HTTPS to transmit credentials and trip data. <a href="https://supabase.com/privacy">Supabase privacy policy</a>.</p>
+  <p>When the app connects, the service gateway logs the IP address, client type and an estimated city and country derived from the connection. These technical logs help diagnose access problems and protect the service. The approximate location stays in the logs for the project’s retention period. Your travel companions cannot see it. <a href="https://supabase.com/docs/guides/platform/logs">Supabase service logs</a>.</p>
+  <p><strong>Resend</strong> delivers transactional confirmation and recovery emails. It receives the recipient’s address, the message and technical delivery data. Resend states that it stores messages and delivery logs in the United States and describes transfer safeguards including Standard Contractual Clauses. <a href="https://resend.com/security/gdpr/">Resend data protection and retention</a> · <a href="https://resend.com/legal/dpa">Data Processing Addendum</a>.</p>
 
-<h2>8. Conservazione</h2>
-<p>I dati restano sul server <strong>finché l'account esiste</strong>. Se un membro lascia o cancella l'account, i viaggi condivisi restano disponibili <strong>agli altri membri</strong>; i suoi dati personali vengono rimossi secondo la sezione successiva.</p>
+  <h3>Community rules, reports and blocking a trip</h3>
+  <p>Before you create or edit content, we ask you to accept the community rules. We store your account ID, the version you accepted and the date. To report a trip, member, activity, checklist entry or PDF, choose a reason from spam, harassment, privacy or other. The private moderation queue records the reporter’s account ID, the trip and target IDs, the reason and the date. The form collects only this information. Moderators can review reports and record their status and outcome.</p>
+  <p>If you leave and block a trip, DuoTrip records a block for that account and trip. Further invitations cannot add you back. You can continue using other trips you belong to.</p>
 
-<h2>9. Cancellazione dell'account</h2>
-<p>Puoi cancellare l'account in due modi:</p>
-<ul>
-<li><strong>dall'app</strong>: Impostazioni → «Cancella account» (rimuove profilo, appartenenze ai viaggi, inviti pendenti e i contenuti inseriti da te);</li>
-<li><strong>dal web</strong>: alla pagina <a href="../account-deletion/">Cancellazione account</a>, senza dover installare l'app.</li>
-</ul>
-<p>Dopo la cancellazione: il tuo profilo e le tue appartenenze vengono eliminati; i contenuti condivisi con altri membri restano a loro disposizione; le note locali scompaiono con la disinstallazione dell'app.</p>
+  <h3>Retention and deletion</h3>
+  <p>Operational data remains available to your account and trips while you use the service or until you choose to delete it. Local copies support offline use. Signing out or deleting your account starts removal of account data kept by the app on the device. For email and delivery logs, Resend publishes a standard 30-day retention period on its Free, Pro and Scale plans. <a href="../account-deletion/#en">How to delete your account and what happens to your content</a>.</p>
+  <p>When you upgrade an older version, notes, activities or PDFs that DuoTrip cannot associate with an account are kept in a private archive on your phone. This archive is excluded from syncing, sharing and backups and stays on the device after sign-out or account deletion. To remove it and all other local DuoTrip data, go to <strong>Android Settings → Apps → DuoTrip → Storage → Clear storage</strong>. Menu names may vary by phone.</p>
 
-<h2>10. I tuoi diritti (GDPR)</h2>
-<p>Hai diritto di chiedere: accesso, rettifica, cancellazione, portabilità, limitazione del trattamento e opposizione. Puoi presentare reclamo al Garante per la protezione dei dati personali. Scrivi a <strong>luca1091@gmail.com</strong> (oggetto: «Privacy TT»).</p>
-
-<h2>11. Minori</h2>
-<p>L'app non è destinata a minori di 18 anni.</p>
-
-<h2>12. Modifiche</h2>
-<p>Questa policy può essere aggiornata; l'ultima versione è sempre pubblicata a questo indirizzo, con la data di aggiornamento in testa.</p>
+  <h3>Your rights</h3>
+  <p>You may request access, correction, erasure, restriction and portability, or object where the GDPR provides for it. Contact the controller at <a href="mailto:luca1091@gmail.com">luca1091@gmail.com</a>. You may lodge a complaint with the <a href="https://www.garanteprivacy.it/i-miei-diritti">Italian Data Protection Authority</a>.</p>
+</article>
+</main>
 </body>
 </html>

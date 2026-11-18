@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="it"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<title>DuoTrip · Conferma email</title><style>:root{color-scheme:light dark;font:1rem/1.55 system-ui,sans-serif;color:#2b211e;background:#faf7f2}body{max-width:32rem;margin:clamp(2rem,12vh,7rem) auto;padding:0 1.25rem}h1{font-size:clamp(1.75rem,6vw,2.5rem);line-height:1.15}a{color:#742c42}a,button,input{font:inherit}label,input{display:block}input,button{box-sizing:border-box;padding:.75rem;min-height:48px;border-radius:.6rem}input{width:100%;margin:.3rem 0 1rem;border:1px solid #796b68}button{background:#742c42;color:white;border:0;cursor:pointer}button:disabled{opacity:.6}a:focus-visible,input:focus-visible,button:focus-visible{outline:3px solid #2779aa;outline-offset:4px}[hidden]{display:none!important}@media(prefers-color-scheme:dark){:root{color:#f4ece7;background:#221c1b}a{color:#ffb4c3}button{background:#ffb4c3;color:#30191d}}</style></head>
+<body><main><p>DuoTrip</p><h1 id="heading">Conferma email</h1><p id="message" role="status">Accedi a DuoTrip per verificare il tuo account.</p>
+<a id="open" href="duotrip://auth/callback">Apri DuoTrip</a></main>
+<script>
+(() => {
+  const fragment = new URLSearchParams(location.hash.slice(1));
+  const query = new URLSearchParams(location.search);
+  history.replaceState(null, "", location.pathname);
+  const english = !(navigator.language || "it").toLowerCase().startsWith("it");
+  const message = (it, en) => english ? en : it;
+  document.documentElement.lang = english ? "en" : "it";
+  document.getElementById("heading").textContent = message("Conferma email", "Email confirmation");
+  document.title = "DuoTrip · " + document.getElementById("heading").textContent;
+  document.getElementById("open").textContent = message("Apri DuoTrip", "Open DuoTrip");
+  const rejected = fragment.has("error") || query.has("error") || fragment.has("error_code") || query.has("error_code");
+  const arrived = fragment.get("type") === "signup" && Boolean(fragment.get("access_token"));
+  document.getElementById("message").textContent = rejected
+    ? message("Il link è scaduto o è già stato usato. Prova ad accedere. Se serve una nuova conferma, registrati di nuovo con lo stesso indirizzo.", "The link expired or has already been used. Try signing in. If confirmation is still required, register again with the same address.")
+    : arrived
+      ? message("Hai aperto il link di conferma. Torna a DuoTrip e accedi con il tuo indirizzo email e la password scelta.", "You opened the confirmation link. Return to DuoTrip and sign in with your email address and chosen password.")
+      : message("Apri il link ricevuto per email oppure torna a DuoTrip e accedi con la tua password.", "Open the link in your confirmation email, or return to DuoTrip and sign in with your password.");
+})();
+</script></body></html>
